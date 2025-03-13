@@ -36,4 +36,4 @@ jobs:
       - run: uv python pin ${{ matrix.python-version }}
       - uses: hynek/build-and-inspect-python-package@v2
       - run: uv sync --python-preference=only-managed
-      - run: uv run pylint crow-client-docs
+      - run: uv run pylint docs
