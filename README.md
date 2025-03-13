@@ -8,6 +8,20 @@ Documentation and tutorials for crow-client, a client for interacting with endpo
 uv pip install crow-client
 ```
 
+<!--TOC-->
+
+- [Installation](#installation)
+- [Quickstart](#quickstart)
+- [Functionalities](#functionalities)
+  - [Stages](#stages)
+  - [AuthType](#authtype)
+- [Job submission](#job-submission)
+- [Job retrieval](#job-retrieval)
+- [Crow Deployment](#crow-deployment)
+  - [Functional environments](#functional-environments)
+
+<!--TOC-->
+
 ## Quickstart
 
 ```python
