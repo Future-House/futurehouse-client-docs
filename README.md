@@ -43,10 +43,10 @@ job_status = client.get_job(job_id)
 
 Crow-client implements a RestClient (called CrowClient) with the following functionalities:
 
-- [Crow deployment](#crow-deployment): create_crow(CrowDeploymentConfig)
-- [Job submission](#job-submission): create_job(dict)
-- [Job status](#job-status): get_job(job_id)
-- [Authentication](#authtype): auth_client
+- [Authentication](#authtype): `auth_client`
+- [Job submission](#job-submission): `create_job(JobRequest)`
+- [Job status](#job-status): `get_job(job_id)`
+- [Crow deployment](#crow-deployment): `create_crow(CrowDeploymentConfig)`
 
 To create a CrowClient, you need to pass the following parameters:
 | Parameter | Type | Default | Description |
