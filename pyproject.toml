@@ -17,7 +17,6 @@ classifiers = [
     "License :: OSI Approved :: Apache Software License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python",
@@ -66,6 +65,7 @@ preview = true
 [tool.codespell]
 check-filenames = true
 check-hidden = true
+ignore-words-list = "astroid"  # This is a python package's name
 
 [tool.mypy]
 # Type-checks the interior of functions without type annotations.
