@@ -1,4 +1,4 @@
-# crow-client-docs
+# Crow Client Documentation
 
 Documentation and tutorials for crow-client, a client for interacting with endpoints of the FutureHouse crow service.
 
