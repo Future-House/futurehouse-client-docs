@@ -77,8 +77,8 @@ print(client.get_job())
 ```
 
 ## Deploy a Crow
-Deploying a crow is done by calling the `create_crow` method, which receives a `CrowDeploymentConfig` object.
 A crow is a deployment of an environment, which will be used to run the agent.
+Deploying a crow is done by calling the `create_crow` method, which receives a `CrowDeploymentConfig` object.
 
 
 ```python

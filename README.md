@@ -135,6 +135,7 @@ job_id = client.create_job(job_data)
 
 As we will see in the [Crow Deployment section](#crow-deployment), we need to pass a agent module for deployment. On runtime, we can pass a `runtime_config` to interact with the agent's configuration.
 `runtime_config` can receive a `AgentConfig` object with the desired kwargs. Check the available `AgentConfig` fields in the [LDP documentation](https://github.com/Future-House/ldp/blob/main/src/ldp/agent/agent.py#L87). Besides the `AgentConfig` object, we can also pass `timeout` and `max_steps` to limit the execution time and the number of steps the agent can take.
+Other especialised configurations are also available but are outside the scope of this documentation.
 
 ## Job retrieval
 
