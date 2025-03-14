@@ -91,8 +91,6 @@ The stage is where your crow will be deployed. This parameter can be one of the 
 | --- | --- |
 | Stage.DEV | Development environment at https://dev.api.platform.futurehouse.org |
 | Stage.PROD | Production environment at https://api.platform.futurehouse.org |
-| Stage.LOCAL | Local development at http://localhost:8080 |
-| Stage.LOCAL_DOCKER | Docker local development at http://host.docker.internal:8080 |
 
 ### AuthType
 
@@ -224,7 +222,7 @@ from crow_client import CrowClient
 from crow_client.models import CrowDeploymentConfig, Stage
 from crow_client.clients.rest_client import generate_requirements
 
-client = CrowClient(stage=Stage.LOCAL)
+client = CrowClient(stage=Stage.DEV)
 
 crow = CrowDeploymentConfig(
     functional_environment=my_env,
