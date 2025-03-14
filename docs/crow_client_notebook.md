@@ -12,6 +12,8 @@ jupyter:
     name: python3
 ---
 
+# Crow Client usage example
+
 ```python
 import time
 from pathlib import Path
@@ -29,13 +31,18 @@ from crow_client.models import (
 from ldp.agent import AgentConfig
 ```
 
+## Client instantiation
+
 ```python
-# Instantiate the client
 client = CrowClient(stage=Stage.DEV, auth_type=AuthType.GOOGLE)
 ```
 
+## Submit a job
+
+
+Submitting jobs is done by calling the `create_job` method, which receives a `JobRequest` object.
+
 ```python
-# Create a simple Job
 job_data = JobRequest(
     name="job-futurehouse-dummy-env-dev",
     query="How many moons does earth have?",
@@ -47,9 +54,9 @@ while client.get_job()["status"] != "success":
 print(client.get_job())
 ```
 
-```python
-# Create a more complex job with runtime config
+You can also pass a `runtime_config` to the job, which will be used to configure the agent on runtime.
 
+```python
 agent = AgentConfig(
     agent_type="ReActAgent",
     agent_kwargs={
@@ -69,8 +76,13 @@ while client.get_job()["status"] != "success":
 print(client.get_job())
 ```
 
+## Deploy a Crow
+Deploying a crow is done by calling the `create_crow` method, which receives a `CrowDeploymentConfig` object.
+A crow is a deployment of an environment, which will be used to run the agent.
+
+
 ```python
-# Deploy a Crow with Frame Paths
+
 frame_paths = [
     FramePath(path="state.pdbs", type="pdb", is_iterable=True),
     FramePath(path="state.single_pdb", type="pdb"),
