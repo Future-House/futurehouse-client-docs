@@ -105,7 +105,7 @@ The auth_type parameter can be one of the following:
 
 ## Job submission
 
-CrowClient can be used to submit jobs to the FutureHouse platform. Using a CrowClient instance, you can submit jobs to the platform by calling the create_job method, which receives a `JobRequest` (or a dictionary) and returns the job id.
+CrowClient can be used to submit jobs to the FutureHouse platform. Using a CrowClient instance, you can submit jobs to the platform by calling the create_job method, which receives a `JobRequest` (or a dictionary with `kwargs`) and returns the job id.
 
 ```python
 from crow_client import CrowClient
@@ -113,7 +113,6 @@ from crow_client.models import AuthType, Stage
 
 client = CrowClient(
     stage=Stage.DEV,
-    organization="your_organization",
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
@@ -134,15 +133,8 @@ job_id = client.create_job(job_data)
 | query | str | Query or task to be executed by the crow |
 | runtime_config | RuntimeConfig | Optional runtime parameters for the job |
 
-> NOTE: Add some docs on `runtime_config` here. How to use it to make runtime changes to your crow.
->
-> Considering PaperQA, can we use it to change the `llm`, for instance?
->
-> How to use the `upload_id` for the gcp?
->
-> Can we use it to deserialize the `state`?
->
-> Can we use it to maintain files after the job is finished? Maybe giving the option to download the files from the platform?
+As we will see in the [Crow Deployment section](#crow-deployment), we need to pass a agent module for deployment. On runtime, we can pass a `runtime_config` to interact with the agent's configuration.
+`runtime_config` can receive a `AgentConfig` object with the desired kwargs. Check the available `AgentConfig` fields in the [LDP documentation](https://github.com/Future-House/ldp/blob/main/src/ldp/agent/agent.py#L87). Besides the `AgentConfig` object, we can also pass `timeout` and `max_steps` to limit the execution time and the number of steps the agent can take.
 
 ## Job retrieval
 
@@ -157,20 +149,12 @@ client = CrowClient(
     api_key="your_api_key",
 )
 
-job_id = "e809b6ba-bc0f-4e5a-9a91-f9a76ab92a30"
+job_id = "job_id"
 
 job_status = client.get_job(job_id)
 ```
 
-`job_status` contains all the information about the job. For instance, its `status`, `task` and the entire trajectory as `environment_frame`
-
-> NOTE: Do we want to provide an illustration of this schema?
->
-> NOTE: Are `CrowJob` and `CrowJobClient` useful?? What else can they do?
->
-> `CrowJob` was in previous README, but it seems it's gone now.
->
-> `CrowJobClient` seems to have only a few methods: `finalize_environment`, `store_agent_state`, and `store_environment_frame`. It seems to work more in behind the scenes. Should we document it?
+`job_status` contains all the information about the job. For instance, its `status`, `task` and trajectory in `environment_frame`.
 
 ## Crow Deployment
 
@@ -184,17 +168,13 @@ from crow_client.models import CrowDeploymentConfig, Stage, AuthType
 
 client = CrowClient(
     stage=Stage.DEV,
-    organization="your_organization",
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
 
-> NOTE: What are `path` and `environment` here?
-
 crow = CrowDeploymentConfig(
     path=Path("../envs/dummy_env"),
     environment="dummy_env.env.DummyEnv",
-    requires_aviary_internal=False,
     environment_variables={"SAMPLE_ENV_VAR": "sample_val"},
     agent="ldp.agent.SimpleAgent",
 )
@@ -206,7 +186,7 @@ client.get_build_status()
 
 More information on how to define an `aviary.environment` can be found in the [Aviary documentation](https://github.com/Future-House/aviary?tab=readme-ov-file#environment).
 
-> NOTE: Want to talk about local crow deployment here.
+In the `CrowDeploymentConfig` object, `path` is the path to the python module where the encironment is implemented. Inside path, you must have either a `requirements.txt` or a `pyproject.toml` file for `crow-client` to be able to install the dependencies. `environment` is the actual environment name as a module.
 
 ### Functional environments
 
