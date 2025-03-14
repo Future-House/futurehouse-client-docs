@@ -22,7 +22,7 @@ classifiers = [
     "Programming Language :: Python",
 ]
 dependencies = [
-    "crow-client",
+    "crow-client>=0.3.10",
     "ipykernel",
     "python-dotenv",
 ]

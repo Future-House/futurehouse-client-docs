@@ -53,6 +53,8 @@ job_id = client.create_job(job_data)
 job_status = client.get_job(job_id)
 ```
 
+A quickstart example can be found in the [crow_client_notebook.ipynb](./docs/crow_client_notebook.ipynb) file. In this file, we will see how to submit and retrieve a job, pass runtime configuration to the agent, and deploy a crow.
+
 ## Functionalities
 
 Crow-client implements a RestClient (called CrowClient) with the following functionalities:

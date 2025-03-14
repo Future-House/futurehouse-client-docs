@@ -542,7 +542,7 @@ wheels = [
 
 [[package]]
 name = "crow-client"
-version = "0.3.5"
+version = "0.3.10"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "cloudpickle" },
@@ -553,9 +553,9 @@ dependencies = [
     { name = "python-dotenv" },
     { name = "tenacity" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/87/a6/a1b449c7e18fa48b03cd610550356019f9841a9c7a041ca1923f374562dc/crow_client-0.3.5.tar.gz", hash = "sha256:ee5457a37e5e41c40e8450b73750163d36e6bb33508553f602557331faab84a2", size = 170567 }
+sdist = { url = "https://files.pythonhosted.org/packages/3d/a8/791b7e7f5d3d8093b39bbc120b54d967b3338f5b331369087204a1b1fdf2/crow_client-0.3.10.tar.gz", hash = "sha256:285356c228fd3c8ca90f57f054ce5edaeb5a4c346b376e0b88dde94b418bf701", size = 173206 }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/3e/6a/a15ffec54587915eae641d1618e8867573eb1dfb79bbb60db1a20dccb0f7/crow_client-0.3.5-py3-none-any.whl", hash = "sha256:c9d0e3d950ef32f368f08c94944de89343e1e33e32cb97554f9da0bc0abd033b", size = 19955 },
+    { url = "https://files.pythonhosted.org/packages/5c/58/e1e8acf6b4c407b8eb4d2bd199e92f675b417c5876a147c0d47f8dfee1c7/crow_client-0.3.10-py3-none-any.whl", hash = "sha256:a9082e18f53244c9c809f58d4f4abb7b02ddf44df8cff351b248c27ad3705b08", size = 22408 },
 ]
 
 [package.optional-dependencies]
@@ -610,7 +610,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "crow-client" },
+    { name = "crow-client", specifier = ">=0.3.10" },
     { name = "ipykernel" },
     { name = "ipython", marker = "extra == 'dev'", specifier = ">=8" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.8" },
