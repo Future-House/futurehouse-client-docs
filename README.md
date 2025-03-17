@@ -2,12 +2,6 @@
 
 Documentation and tutorials for crow-client, a client for interacting with endpoints of the FutureHouse crow service.
 
-## Installation
-
-```bash
-uv pip install crow-client
-```
-
 <!--TOC-->
 
 - [Installation](#installation)
@@ -21,6 +15,12 @@ uv pip install crow-client
   - [Functional environments](#functional-environments)
 
 <!--TOC-->
+
+## Installation
+
+```bash
+uv pip install crow-client
+```
 
 ## Quickstart
 
