@@ -96,8 +96,7 @@ The stage is where your crow will be deployed. This parameter can be one of the 
 
 ### Authentication
 
-In order to use the CrowClient, you need to authenticate yourself. Authenticatoin is done by providing an API key, which can be obtained directly from your profile page in the FutureHouse platform.
-
+In order to use the CrowClient, you need to authenticate yourself. Authentication is done by providing an API key, which can be obtained directly from your profile page in the FutureHouse platform.
 ## Job submission
 
 CrowClient can be used to submit jobs to the FutureHouse platform. Using a CrowClient instance, you can submit jobs to the platform by calling the create_job method, which receives a `JobRequest` (or a dictionary with `kwargs`) and returns the job id.
