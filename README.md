@@ -25,7 +25,7 @@ uv pip install crow-client
 ## Quickstart
 
 ```python
-from crow_client import CrowClient
+from crow_client import CrowClient, JobNames
 from crow_client.models import CrowDeploymentConfig
 from pathlib import Path
 from aviary.core import DummyEnv
@@ -44,7 +44,7 @@ crow = CrowDeploymentConfig(
 client.create_crow(crow)
 
 job_data = {
-    "name": "job-futurehouse-dummy-env-dev",
+    "name": JobNames.CROW,
     "query": "Has anyone tested therapeutic exerkines in humans or NHPs?"
 }
 
@@ -106,9 +106,20 @@ The auth_type parameter can be one of the following:
 ## Job submission
 
 CrowClient can be used to submit jobs to the FutureHouse platform. Using a CrowClient instance, you can submit jobs to the platform by calling the create_job method, which receives a `JobRequest` (or a dictionary with `kwargs`) and returns the job id.
+Aiming to make the submission of jobs as simple as possible, we have created a `JobNames` enum that contains the available job types.
+The available supported jobs are:
+| Job Name | Task type | Description |
+| --- | --- | --- |
+| `JobNames.CROW` | Fast Search | Ask a question of scientific data sources, and receive a high-accuracy, cited response. Built with [PaperQA2](https://github.com/Future-House/paper-qa). |
+| `JobNames.FALCON` | Deep Search | Use a plethora of sources to deeply research. Receive a detailed, structured report as a response. |
+| `JobNames.OWL` | Precedent Search | Formerly known as HasAnyone, query if anyone has ever done something in science. |
+| `JobNames.DUMMY` | - | This is a dummy task. Mainly for testing purposes. |
+
+Using the `JobNames` enum, the client automatically adapts the job name to the current stage.
+The job submission looks like this:
 
 ```python
-from crow_client import CrowClient
+from crow_client import CrowClient, JobNames
 from crow_client.models import AuthType, Stage
 
 client = CrowClient(
@@ -118,7 +129,7 @@ client = CrowClient(
 )
 
 job_data = {
-    "name": "job-futurehouse-paperqa2-dev",
+    "name": JobNames.CROW,
     "query": "Has anyone tested therapeutic exerkines in humans or NHPs?"
 }
 
