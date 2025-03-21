@@ -2,25 +2,25 @@
 
 Documentation and tutorials for crow-client, a client for interacting with endpoints of the FutureHouse crow service.
 
-## Installation
-
-```bash
-uv pip install crow-client
-```
-
 <!--TOC-->
 
 - [Installation](#installation)
 - [Quickstart](#quickstart)
 - [Functionalities](#functionalities)
   - [Stages](#stages)
-  - [AuthType](#authtype)
+  - [Authentication](#authentication)
 - [Job submission](#job-submission)
 - [Job retrieval](#job-retrieval)
 - [Crow Deployment](#crow-deployment)
   - [Functional environments](#functional-environments)
 
 <!--TOC-->
+
+## Installation
+
+```bash
+uv pip install crow-client
+```
 
 ## Quickstart
 
@@ -94,14 +94,9 @@ The stage is where your crow will be deployed. This parameter can be one of the 
 | Stage.DEV | Development environment at https://dev.api.platform.futurehouse.org |
 | Stage.PROD | Production environment at https://api.platform.futurehouse.org |
 
-### AuthType
+### Authentication
 
-The auth_type parameter can be one of the following:
-| Name | Description |
-| --- | --- |
-| AuthType.GOOGLE | Authentication using Google OAuth |
-| AuthType.PASSWORD | Authentication using email and password |
-| AuthType.API_KEY | Authentication using an FutureHouse platform API key |
+In order to use the CrowClient, you need to authenticate yourself. Authentication is done by providing an API key, which can be obtained directly from your profile page in the FutureHouse platform.
 
 ## Job submission
 
