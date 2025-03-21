@@ -19,6 +19,7 @@ import time
 from pathlib import Path
 
 from crow_client import CrowClient
+from crow_client.clients import JobNames
 from crow_client.models import (
     AuthType,
     CrowDeploymentConfig,
@@ -44,7 +45,7 @@ Submitting jobs is done by calling the `create_job` method, which receives a `Jo
 
 ```python
 job_data = JobRequest(
-    name="job-futurehouse-dummy-env-dev",
+    name=JobNames.from_string("dummy"),
     query="How many moons does earth have?",
 )
 client.create_job(job_data)
@@ -65,7 +66,7 @@ agent = AgentConfig(
     },
 )
 job_data = JobRequest(
-    name="job-futurehouse-dummy-env-dev",
+    name=JobNames.DUMMY,
     query="How many moons does earth have?",
     runtime_config=RuntimeConfig(agent=agent, max_steps=5),
 )
