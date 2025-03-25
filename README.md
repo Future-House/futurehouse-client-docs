@@ -1,4 +1,4 @@
-# Crow Client Documentation
+# FutureHouse Platform API Documentation
 
 Documentation and tutorials for `crow-client`, a client for interacting with endpoints of the FutureHouse platform.
 
