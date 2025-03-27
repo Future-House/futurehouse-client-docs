@@ -27,7 +27,6 @@ uv pip install crow-client
 
 ```python
 from crow_client import CrowClient, JobNames
-from crow_client.models import CrowDeploymentConfig
 from pathlib import Path
 from aviary.core import DummyEnv
 import ldp
@@ -48,7 +47,7 @@ job_run_id = client.create_job(job_data)
 job_status = client.get_job(job_run_id)
 ```
 
-A quickstart example can be found in the [crow_client_notebook.ipynb](./docs/crow_client_notebook.ipynb) file, where we show how to submit and retrieve a job_run, pass runtime configuration to the agent, and deploy a new job.
+A quickstart example can be found in the [crow_client_notebook.ipynb](./docs/crow_client_notebook.ipynb) file, where we show how to submit and retrieve a job task, pass runtime configuration to the agent, and ask follow-up questions to the previous job.
 
 ## Functionalities
 
@@ -61,7 +60,7 @@ Crow-client implements a RestClient (called `CrowClient`) with the following fun
 To create a `CrowClient`, you need to pass the following parameters:
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
-| stage | Stage | Stage.DEV | Where to submit the job will be deployed/ran? |
+| stage | Stage | Stage.DEV | Where the job will be submitted? |
 | organization | str \| None | None | Which organization to use? |
 | auth_type | AuthType | AuthType.API_KEY | Which authentication method to use? |
 | api_key | str \| None | None | The API key to use for authentication, if using auth_type=AuthType.API_KEY. |
@@ -82,7 +81,7 @@ client = CrowClient(
 
 ### Stages
 
-The stage is where your job will be deployed or submitted. This parameter can be one of the following:
+The stage is where your job will be submitted. This parameter can be one of the following:
 | Name | Description |
 | --- | --- |
 | Stage.DEV | Development environment at https://dev.api.platform.futurehouse.org |
