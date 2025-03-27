@@ -2,13 +2,7 @@
 
 Documentation and tutorials for `crow-client`, a client for interacting with endpoints of the FutureHouse platform.
 
-| TODO: We need to explain why we have CrowClient, CrowDeploymentConfig, JobNames.CROW etc. but we refer to them as client, deployment config, etc.
-| What is a crow?
-| What is a job?
-| Do we both deploy a job and then submit a job?
-| Should we call "submit a job" as "run a job"?
-
-FutureHouse's mascot is the crow. Therefore, some objects are named after the crow as a homage.
+> FutureHouse's mascot is the crow. Therefore, some objects are named after the crow as a homage.
 
 <!--TOC-->
 
