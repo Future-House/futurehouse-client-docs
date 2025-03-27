@@ -13,8 +13,6 @@ Documentation and tutorials for `crow-client`, a client for interacting with end
 - [Authentication](#authentication)
 - [Job submission](#job-submission)
 - [Job retrieval](#job-retrieval)
-- [Job Deployment](#job-deployment)
-  - [Functional environments](#functional-environments)
 
 <!--TOC-->
 
@@ -33,17 +31,11 @@ from pathlib import Path
 from aviary.core import DummyEnv
 import ldp
 
-client = CrowClient()
-
-deployment_config = CrowDeploymentConfig(
-    name="dummy-env-dev",
-    path=Path("../envs/dummy_env"),
-    environment="dummy_env.env.DummyEnv",
-    environment_variables={"SAMPLE_ENV_VAR": "sample_val"},
-    agent="ldp.agent.SimpleAgent",
+client = CrowClient(
+    stage=Stage.DEV,
+    auth_type=AuthType.API_KEY,
+    api_key="your_api_key",
 )
-
-client.create_crow(deployment_config)
 
 job_data = {
     "name": JobNames.CROW,
@@ -64,7 +56,6 @@ Crow-client implements a RestClient (called `CrowClient`) with the following fun
 - [Authentication](#authtype): `auth_client`
 - [Job submission](#job-submission): `create_job(JobRequest)`
 - [Job status](#job-status): `get_job(job_id)`
-- [Job deployment](#job-deployment): `create_crow(CrowDeploymentConfig)`
 
 To create a `CrowClient`, you need to pass the following parameters:
 | Parameter | Type | Default | Description |
@@ -166,85 +157,3 @@ job_status = client.get_job(job_id)
 ```
 
 `job_status` contains information about the job. For instance, its `status`, `task`, `environment_name` and `agent_name`, and other fields specific to the job.
-
-## Job Deployment
-
-The client provides simple functions to deploy and monitor your jobs. A job consists of an [`aviary.environment`](https://github.com/Future-House/aviary?tab=readme-ov-file#environment) and a [`ldp.agent`](https://github.com/Future-House/ldp?tab=readme-ov-file#agent).
-With a environment developed as a python module, the deployment looks like this:
-
-```python
-from pathlib import Path
-from crow_client import CrowClient
-from crow_client.models import CrowDeploymentConfig, Stage, AuthType
-
-client = CrowClient(
-    stage=Stage.DEV,
-    auth_type=AuthType.API_KEY,
-    api_key="your_api_key",
-)
-
-deploy_config = CrowDeploymentConfig(
-    path=Path("../envs/dummy_env"),
-    environment="dummy_env.env.DummyEnv",
-    environment_variables={"SAMPLE_ENV_VAR": "sample_val"},
-    agent="ldp.agent.SimpleAgent",
-)
-
-client.create_crow(deploy_config)
-
-client.get_build_status()
-```
-
-More information on how to define an `aviary.environment` can be found in the [Aviary documentation](https://github.com/Future-House/aviary?tab=readme-ov-file#environment).
-
-In the `CrowDeploymentConfig` object, `path` is the path to the python module where the encironment is implemented. Inside path, you must have either a `requirements.txt` or a `pyproject.toml` file for `crow-client` to be able to install the dependencies. `environment` is the actual environment name as a module.
-Please check our [quickstart notebook example](./docs/crow_client_notebook.ipynb) for more details on how to define the `CrowDeploymentConfig`.
-
-### Functional environments
-
-Aviary also supports functional environments. For functional environments we don't need to pass the file path and can pass the environment builder instead:
-
-```python
-from aviary.core import fenv
-import numpy as np
-from crow_client import CrowClient
-from crow_client.models import CrowDeploymentConfig, Stage
-from crow_client.clients.rest_client import generate_requirements
-
-
-def function_to_use_here(inpste: str):
-    a = np.array(np.asmatrix("1 2; 3 4"))
-    return inpste
-
-
-@fenv.start()
-def my_env(topic: str):
-    """
-    Here is the doc string describing the task.
-    """
-    a = np.array(np.asmatrix("1 2; 3 4"))
-    return f"Write a sad story about {topic}", {"chosen_topic": topic}
-
-
-@my_env.tool()
-def print_story(story: str, state) -> None:
-    """Print the story and complete the task"""
-    print(story)
-    print(function_to_use_here(story))
-    state.reward = 1
-    state.done = True
-
-
-client = CrowClient(stage=Stage.DEV)
-
-job = CrowDeploymentConfig(
-    functional_environment=my_env,
-    environment="my_env",
-    requires_aviary_internal=False,
-    environment_variables={"SAMPLE_ENV_VAR": "sample_val"},
-    agent="ldp.agent.SimpleAgent",
-    requirements=generate_requirements(my_env, globals()),
-)
-
-client.create_crow(job)
-```
