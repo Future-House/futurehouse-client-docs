@@ -4,50 +4,9 @@ Documentation and tutorials for crow-client, a client for interacting with endpo
 
 > FutureHouse's mascot is the crow. Therefore, some objects are named after the crow as a homage.
 
-## Installation
-
-`crow-client` depends on agents from [`ldp`](https://github.com/Future-House/ldp), which requires the `dm-tree` package. Since `dm-tree` depends on `cmake`, you need to have `cmake` installed before installing `crow-client`.
-
-### 1. Install `cmake`
-
-#### macOS
-
-```bash
-brew install cmake
-```
-
-#### Linux
-
-```bash
-sudo apt-get update
-sudo apt-get install cmake
-```
-
-#### Windows
-
-- Download the CMake installer from the official [website](https://cmake.org/download/).
-- Run the installer and select "Add CMake to system PATH" during setup.
-- After installation, verify it by running in Command Prompt or PowerShell:
-
-```bash
-cmake --version
-```
-
-### 2. Install `crow-client`
-
-```bash
-uv pip install crow-client
-```
-
 <!--TOC-->
 
 - [Installation](#installation)
-  - [1. Install `cmake`](#1-install-cmake)
-    - [macOS](#macos)
-    - [Linux](#linux)
-    - [Windows](#windows)
-  - [2. Install `crow-client`](#2-install-crow-client)
-- [Installation](#installation-1)
 - [Quickstart](#quickstart)
 - [Functionalities](#functionalities)
   - [Stages](#stages)
