@@ -12,6 +12,7 @@ Documentation and tutorials for crow-client, a client for interacting with endpo
   - [Stages](#stages)
 - [Authentication](#authentication)
 - [Job submission](#job-submission)
+- [Job Continuation](#job-continuation)
 - [Job retrieval](#job-retrieval)
 
 <!--TOC-->
@@ -134,9 +135,42 @@ job_id = client.create_job(job_data)
 | query          | str           | Query or task to be executed by the job                                                                             |
 | runtime_config | RuntimeConfig | Optional runtime parameters for the job                                                                             |
 
-As we will see in the [Job Deployment section](#job-deployment), we need to pass an agent module for deployment. On runtime, we can pass a `runtime_config` to interact with the agent's configuration.
 `runtime_config` can receive a `AgentConfig` object with the desired kwargs. Check the available `AgentConfig` fields in the [LDP documentation](https://github.com/Future-House/ldp/blob/main/src/ldp/agent/agent.py#L87). Besides the `AgentConfig` object, we can also pass `timeout` and `max_steps` to limit the execution time and the number of steps the agent can take.
 Other especialised configurations are also available but are outside the scope of this documentation.
+
+## Job Continuation
+
+Once a job is submitted and the answer is returned, FutureHouse platform allow you to ask follow-up questions to the previous job.
+It is also possible through the paltform API.
+To accomplish that, we can use the `runtime_config` we discussed in the [Job submission](#job-submission) section.
+
+```python
+from crow_client import CrowClient, JobNames
+from crow_client.models import AuthType, Stage
+
+client = CrowClient(
+    stage=Stage.DEV,
+    auth_type=AuthType.API_KEY,
+    api_key="your_api_key",
+)
+
+job_data = {
+    "name": JobNames.CROW,
+    "query": "How many species of birds are there?"
+}
+
+job_id = client.create_job(job_data)
+
+continued_job_data = {
+    "name": JobNames.CROW,
+    "query": "From the previous answer, specifically,how many species of crows are there?",
+    "runtime_config": {
+        "continued_job_id": job_id
+    }
+}
+
+continued_job_id = client.create_job(continued_job_data)
+```
 
 ## Job retrieval
 
