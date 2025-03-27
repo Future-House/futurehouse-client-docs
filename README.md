@@ -47,6 +47,7 @@ uv pip install crow-client
     - [Linux](#linux)
     - [Windows](#windows)
   - [2. Install `crow-client`](#2-install-crow-client)
+- [Installation](#installation-1)
 - [Quickstart](#quickstart)
 - [Functionalities](#functionalities)
   - [Stages](#stages)
