@@ -12,6 +12,7 @@ Documentation and tutorials for crow-client, a client for interacting with endpo
   - [Stages](#stages)
 - [Authentication](#authentication)
 - [Job submission](#job-submission)
+- [Job Continuation](#job-continuation)
 - [Job retrieval](#job-retrieval)
 
 <!--TOC-->
@@ -26,7 +27,6 @@ uv pip install crow-client
 
 ```python
 from crow_client import CrowClient, JobNames
-from crow_client.models import CrowDeploymentConfig
 from pathlib import Path
 from aviary.core import DummyEnv
 import ldp
@@ -47,7 +47,7 @@ job_run_id = client.create_job(job_data)
 job_status = client.get_job(job_run_id)
 ```
 
-A quickstart example can be found in the [crow_client_notebook.ipynb](./docs/crow_client_notebook.ipynb) file, where we show how to submit and retrieve a job_run, pass runtime configuration to the agent, and deploy a new job.
+A quickstart example can be found in the [crow_client_notebook.ipynb](./docs/crow_client_notebook.ipynb) file, where we show how to submit and retrieve a job task, pass runtime configuration to the agent, and ask follow-up questions to the previous job.
 
 ## Functionalities
 
@@ -60,7 +60,7 @@ Crow-client implements a RestClient (called `CrowClient`) with the following fun
 To create a `CrowClient`, you need to pass the following parameters:
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
-| stage | Stage | Stage.DEV | Where to submit the job will be deployed/ran? |
+| stage | Stage | Stage.DEV | Where the job will be submitted? |
 | organization | str \| None | None | Which organization to use? |
 | auth_type | AuthType | AuthType.API_KEY | Which authentication method to use? |
 | api_key | str \| None | None | The API key to use for authentication, if using auth_type=AuthType.API_KEY. |
@@ -81,7 +81,7 @@ client = CrowClient(
 
 ### Stages
 
-The stage is where your job will be deployed or submitted. This parameter can be one of the following:
+The stage is where your job will be submitted. This parameter can be one of the following:
 | Name | Description |
 | --- | --- |
 | Stage.DEV | Development environment at https://dev.api.platform.futurehouse.org |
@@ -134,9 +134,42 @@ job_id = client.create_job(job_data)
 | query          | str           | Query or task to be executed by the job                                                                             |
 | runtime_config | RuntimeConfig | Optional runtime parameters for the job                                                                             |
 
-As we will see in the [Job Deployment section](#job-deployment), we need to pass an agent module for deployment. On runtime, we can pass a `runtime_config` to interact with the agent's configuration.
 `runtime_config` can receive a `AgentConfig` object with the desired kwargs. Check the available `AgentConfig` fields in the [LDP documentation](https://github.com/Future-House/ldp/blob/main/src/ldp/agent/agent.py#L87). Besides the `AgentConfig` object, we can also pass `timeout` and `max_steps` to limit the execution time and the number of steps the agent can take.
 Other especialised configurations are also available but are outside the scope of this documentation.
+
+## Job Continuation
+
+Once a job is submitted and the answer is returned, FutureHouse platform allow you to ask follow-up questions to the previous job.
+It is also possible through the platform API.
+To accomplish that, we can use the `runtime_config` we discussed in the [Job submission](#job-submission) section.
+
+```python
+from crow_client import CrowClient, JobNames
+from crow_client.models import AuthType, Stage
+
+client = CrowClient(
+    stage=Stage.DEV,
+    auth_type=AuthType.API_KEY,
+    api_key="your_api_key",
+)
+
+job_data = {
+    "name": JobNames.CROW,
+    "query": "How many species of birds are there?"
+}
+
+job_id = client.create_job(job_data)
+
+continued_job_data = {
+    "name": JobNames.CROW,
+    "query": "From the previous answer, specifically,how many species of crows are there?",
+    "runtime_config": {
+        "continued_job_id": job_id
+    }
+}
+
+continued_job_id = client.create_job(continued_job_data)
+```
 
 ## Job retrieval
 
