@@ -140,7 +140,7 @@ Other especialised configurations are also available but are outside the scope o
 ## Job Continuation
 
 Once a job is submitted and the answer is returned, FutureHouse platform allow you to ask follow-up questions to the previous job.
-It is also possible through the paltform API.
+It is also possible through the platform API.
 To accomplish that, we can use the `runtime_config` we discussed in the [Job submission](#job-submission) section.
 
 ```python
