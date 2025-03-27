@@ -12,7 +12,7 @@ jupyter:
     name: python3
 ---
 
-# Crow Client usage example
+# FutureHouse platform client usage example
 
 ```python
 import time
