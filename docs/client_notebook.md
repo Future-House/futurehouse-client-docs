@@ -107,9 +107,9 @@ print(f"First task answer: \n{client.get_task().formatted_answer}")
 continued_task_data = {
     "name": JobNames.CROW,
     "query": (
-        "From the previous answer, specifically,how many species of crows are there?"
+        "From the previous answer, specifically, how many species of crows are there?"
     ),
-    "runtime_config": {"continued_task_id": task_id},
+    "runtime_config": {"continued_job_id": task_id},
 }
 
 continued_task_id = client.create_task(continued_task_data)
