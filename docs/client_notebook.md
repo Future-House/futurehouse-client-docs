@@ -34,7 +34,7 @@ Please log in to the platform and go to your user settings to get your API key.
 
 ```python
 client = CrowClient(
-    stage=Stage.DEV,
+    stage=Stage.PROD,
     auth_type=AuthType.API_KEY,
     api_key="your-api-key",
 )

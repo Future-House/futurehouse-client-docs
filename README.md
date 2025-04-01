@@ -1,6 +1,6 @@
 # FutureHouse Platform API Documentation
 
-Documentation and tutorials for crow-client, a client for interacting with endpoints of the FutureHouse crow service.
+Documentation and tutorials for futurehouse-client, a client for interacting with endpoints of the FutureHouse platform.
 
 > FutureHouse's mascot is the crow. Therefore, some objects are named after the crow as a homage.
 
@@ -20,18 +20,18 @@ Documentation and tutorials for crow-client, a client for interacting with endpo
 ## Installation
 
 ```bash
-uv pip install crow-client
+uv pip install futurehouse-client
 ```
 
 ## Quickstart
 
 ```python
-from crow_client import CrowClient, JobNames
+from futurehouse_client import FutureHouseClient, JobNames
 from pathlib import Path
 from aviary.core import DummyEnv
 import ldp
 
-client = CrowClient(
+client = FutureHouseClient(
     stage=Stage.DEV,
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
@@ -47,17 +47,17 @@ job_run_id = client.create_job(job_data)
 job_status = client.get_job(job_run_id)
 ```
 
-A quickstart example can be found in the [crow_client_notebook.ipynb](./docs/crow_client_notebook.ipynb) file, where we show how to submit and retrieve a job task, pass runtime configuration to the agent, and ask follow-up questions to the previous job.
+A quickstart example can be found in the [client_notebook.ipynb](./docs/client_notebook.ipynb) file, where we show how to submit and retrieve a job task, pass runtime configuration to the agent, and ask follow-up questions to the previous job.
 
 ## Functionalities
 
-Crow-client implements a RestClient (called `CrowClient`) with the following functionalities:
+FutureHouse client implements a RestClient (called `FutureHouseClient`) with the following functionalities:
 
 - [Authentication](#authtype): `auth_client`
 - [Job submission](#job-submission): `create_job(JobRequest)`
 - [Job status](#job-status): `get_job(job_id)`
 
-To create a `CrowClient`, you need to pass the following parameters:
+To create a `FutureHouseClient`, you need to pass the following parameters:
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
 | stage | Stage | Stage.DEV | Where the job will be submitted? |
@@ -68,10 +68,10 @@ To create a `CrowClient`, you need to pass the following parameters:
 To instantiate a Client, we can use the following code:
 
 ```python
-from crow_client import CrowClient
-from crow_client.models import Stage, AuthType
+from futurehouse_client import FutureHouseClient
+from futurehouse_client.models import Stage, AuthType
 
-client = CrowClient(
+client = FutureHouseClient(
     stage=Stage.DEV,
     organization="your_organization",
     auth_type=AuthType.API_KEY,
@@ -89,11 +89,11 @@ The stage is where your job will be submitted. This parameter can be one of the 
 
 ## Authentication
 
-In order to use the `CrowClient`, you need to authenticate yourself. Authentication is done by providing an API key, which can be obtained directly from your [profile page in the FutureHouse platform](https://platform.futurehouse.org/profile).
+In order to use the `FutureHouseClient`, you need to authenticate yourself. Authentication is done by providing an API key, which can be obtained directly from your [profile page in the FutureHouse platform](https://platform.futurehouse.org/profile).
 
 ## Job submission
 
-`CrowClient` can be used to submit jobs to the FutureHouse platform. Using a `CrowClient` instance, you can submit jobs to the platform by calling the `create_job` method, which receives a `JobRequest` (or a dictionary with `kwargs`) and returns the job id.
+`FutureHouseClient` can be used to submit jobs to the FutureHouse platform. Using a `FutureHouseClient` instance, you can submit jobs to the platform by calling the `create_job` method, which receives a `JobRequest` (or a dictionary with `kwargs`) and returns the job id.
 Aiming to make the submission of jobs as simple as possible, we have created a `JobNames` enum that contains the available job types.
 
 The available supported jobs are:
@@ -108,10 +108,10 @@ Using `JobNames`, the client automatically adapts the job name to the current st
 The job submission looks like this:
 
 ```python
-from crow_client import CrowClient, JobNames
-from crow_client.models import AuthType, Stage
+from futurehouse_client import FutureHouseClient, JobNames
+from futurehouse_client.models import AuthType, Stage
 
-client = CrowClient(
+client = FutureHouseClient(
     stage=Stage.DEV,
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
@@ -144,10 +144,10 @@ It is also possible through the platform API.
 To accomplish that, we can use the `runtime_config` we discussed in the [Job submission](#job-submission) section.
 
 ```python
-from crow_client import CrowClient, JobNames
-from crow_client.models import AuthType, Stage
+from futurehouse_client import FutureHouseClient, JobNames
+from futurehouse_client.models import AuthType, Stage
 
-client = CrowClient(
+client = FutureHouseClient(
     stage=Stage.DEV,
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
@@ -176,10 +176,10 @@ continued_job_id = client.create_job(continued_job_data)
 Once a job is submitted, you can retrieve it by calling the `get_job` method, which receives a job id and returns a `JobResponse` object.
 
 ```python
-from crow_client import CrowClient
-from crow_client.models import AuthType
+from futurehouse_client import FutureHouseClient
+from futurehouse_client.models import AuthType
 
-client = CrowClient(
+client = FutureHouseClient(
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )

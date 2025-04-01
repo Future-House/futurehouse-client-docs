@@ -4,8 +4,8 @@ requires = ["setuptools>=64", "setuptools_scm>=8"]
 
 [dependency-groups]
 dev = [
-    "crow-client-docs[dev]",
-    "crow-client[dev]",
+    "futurehouse-client-docs[dev]",
+    "futurehouse-client[dev]",
 ]
 
 [project]
@@ -22,20 +22,20 @@ classifiers = [
     "Programming Language :: Python",
 ]
 dependencies = [
-    "crow-client>=0.3.10",
+    "futurehouse-client",
     "ipykernel",
     "python-dotenv",
 ]
-description = "Documentation and tutorials for crow-client, a client for interacting with endpoints of the FutureHouse crow service."
+description = "Documentation and tutorials for futurehouse-client, a client for interacting with endpoints of the FutureHouse platform."
 dynamic = ["version"]
-keywords = ["crow", "futurehouse"]
+keywords = ["futurehouse", "platform"]
 license = {file = "LICENSE"}
 maintainers = [
     {email = "jamesbraza@gmail.com", name = "James Braza"},
     {email = "michael.skarlinski@gmail.com", name = "Michael Skarlinski"},
     {email = "white.d.andrew@gmail.com", name = "Andrew White"},
 ]
-name = "crow-client-docs"
+name = "futurehouse-client-docs"
 readme = "README.md"
 requires-python = ">=3.11"
 
@@ -56,8 +56,8 @@ typing = [
 ]
 
 [project.urls]
-issues = "https://github.com/Future-House/crow-client-docs/issues"
-repository = "https://github.com/Future-House/crow-client-docs"
+issues = "https://github.com/Future-House/futurehouse-client-docs/issues"
+repository = "https://github.com/Future-House/futurehouse-client-docs"
 
 [tool.black]
 preview = true
@@ -223,7 +223,7 @@ min-similarity-lines = 12
 [tool.pytest.ini_options]
 # Add the specified OPTS to the set of command line arguments as if they had been
 # specified by the user.
-addopts = "--typeguard-packages=crow-client-docs"
+addopts = "--typeguard-packages=futurehouse-client-docs"
 # set how loops are scoped to avoid https://github.com/BerriAI/litellm/issues/5854
 asyncio_default_fixture_loop_scope = "session"
 # Sets a list of filters and actions that should be taken for matched warnings.
