@@ -51,7 +51,7 @@ FutureHouse client implements a RestClient (called `FutureHouseClient`) with the
 - [Task submission](#task-submission): `create_task(TaskRequest)`
 - [Task status](#task-status): `get_task(task_id)`
 
-To create a `FutureHouseClient`, you need to pass an FutureHouse platform api key:
+To create a `FutureHouseClient`, you need to pass an FutureHouse platform api key (see [Authentication](#authentication)):
 
 ```python
 from futurehouse_client import FutureHouseClient
