@@ -34,7 +34,7 @@ client = FutureHouseClient(
 
 task_data = {
     "name": JobNames.CROW,
-    "query": "Has anyone tested therapeutic exerkines in humans or NHPs?"
+    "query": "Which neglected diseases had a treatment developed by artificial intelligence?"
 }
 
 task_run_id = client.create_task(task_data)
@@ -90,7 +90,7 @@ client = FutureHouseClient(
 )
 
 task_data = {
-    "name": JobNames.CROW,
+    "name": JobNames.OWL,
     "query": "Has anyone tested therapeutic exerkines in humans or NHPs?"
 }
 
