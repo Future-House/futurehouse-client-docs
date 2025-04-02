@@ -2,8 +2,6 @@
 
 Documentation and tutorials for futurehouse-client, a client for interacting with endpoints of the FutureHouse platform.
 
-> FutureHouse's mascot is the crow. Therefore, some objects are named after the crow as a homage.
-
 <!--TOC-->
 
 - [Installation](#installation)
@@ -32,7 +30,6 @@ from aviary.core import DummyEnv
 import ldp
 
 client = FutureHouseClient(
-    stage=Stage.PROD,
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
@@ -60,7 +57,7 @@ FutureHouse client implements a RestClient (called `FutureHouseClient`) with the
 To create a `FutureHouseClient`, you need to pass the following parameters:
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
-| stage | Stage | Stage.DEV | Where the job will be submitted? |
+| stage | Stage | Stage.PROD | Where the job will be submitted? |
 | organization | str \| None | None | Which organization to use? |
 | auth_type | AuthType | AuthType.API_KEY | Which authentication method to use? |
 | api_key | str \| None | None | The API key to use for authentication, if using auth_type=AuthType.API_KEY. |
@@ -72,7 +69,6 @@ from futurehouse_client import FutureHouseClient
 from futurehouse_client.models import Stage, AuthType
 
 client = FutureHouseClient(
-    stage=Stage.PROD,
     organization="your_organization",
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
@@ -84,8 +80,8 @@ client = FutureHouseClient(
 The stage is where your job will be submitted. This parameter can be one of the following:
 | Name | Description |
 | --- | --- |
-| Stage.DEV | Development environment at https://dev.api.platform.futurehouse.org |
 | Stage.PROD | Production environment at https://api.platform.futurehouse.org |
+| Stage.DEV | Development environment at https://dev.api.platform.futurehouse.org |
 
 ## Authentication
 
@@ -113,7 +109,6 @@ from futurehouse_client import FutureHouseClient, JobNames
 from futurehouse_client.models import AuthType, Stage
 
 client = FutureHouseClient(
-    stage=Stage.PROD,
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
@@ -149,7 +144,6 @@ from futurehouse_client import FutureHouseClient, JobNames
 from futurehouse_client.models import AuthType, Stage
 
 client = FutureHouseClient(
-    stage=Stage.PROD,
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
@@ -180,8 +174,7 @@ Once a task is submitted, you can retrieve it by calling the `get_task` method, 
 from futurehouse_client import FutureHouseClient
 from futurehouse_client.models import AuthType
 
-client = FutureHouseClient(
-    stage=Stage.PROD,
+client = FutureHouseClient(,
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
