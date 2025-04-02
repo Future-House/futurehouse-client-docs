@@ -30,7 +30,6 @@ from aviary.core import DummyEnv
 import ldp
 
 client = FutureHouseClient(
-    auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
 
@@ -66,11 +65,9 @@ To instantiate a Client, we can use the following code:
 
 ```python
 from futurehouse_client import FutureHouseClient
-from futurehouse_client.models import Stage, AuthType
 
 client = FutureHouseClient(
     organization="your_organization",
-    auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
 ```
@@ -106,10 +103,8 @@ The task submission looks like this:
 
 ```python
 from futurehouse_client import FutureHouseClient, JobNames
-from futurehouse_client.models import AuthType, Stage
 
 client = FutureHouseClient(
-    auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
 
@@ -141,10 +136,8 @@ To accomplish that, we can use the `runtime_config` we discussed in the [Task su
 
 ```python
 from futurehouse_client import FutureHouseClient, JobNames
-from futurehouse_client.models import AuthType, Stage
 
 client = FutureHouseClient(
-    auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
 
@@ -172,10 +165,8 @@ Once a task is submitted, you can retrieve it by calling the `get_task` method, 
 
 ```python
 from futurehouse_client import FutureHouseClient
-from futurehouse_client.models import AuthType
 
 client = FutureHouseClient(,
-    auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
 
