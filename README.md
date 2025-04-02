@@ -7,7 +7,6 @@ Documentation and tutorials for futurehouse-client, a client for interacting wit
 - [Installation](#installation)
 - [Quickstart](#quickstart)
 - [Functionalities](#functionalities)
-  - [Stages](#stages)
 - [Authentication](#authentication)
 - [Task submission](#task-submission)
 - [Task Continuation](#task-continuation)
@@ -49,36 +48,18 @@ A quickstart example can be found in the [client_notebook.ipynb](./docs/client_n
 
 FutureHouse client implements a RestClient (called `FutureHouseClient`) with the following functionalities:
 
-- [Authentication](#authtype): `auth_client`
 - [Task submission](#task-submission): `create_task(TaskRequest)`
 - [Task status](#task-status): `get_task(task_id)`
 
-To create a `FutureHouseClient`, you need to pass the following parameters:
-| Parameter | Type | Default | Description |
-| --- | --- | --- | --- |
-| stage | Stage | Stage.PROD | Where the job will be submitted? |
-| organization | str \| None | None | Which organization to use? |
-| auth_type | AuthType | AuthType.API_KEY | Which authentication method to use? |
-| api_key | str \| None | None | The API key to use for authentication, if using auth_type=AuthType.API_KEY. |
-
-To instantiate a Client, we can use the following code:
+To create a `FutureHouseClient`, you need to pass an FutureHouse platform api key:
 
 ```python
 from futurehouse_client import FutureHouseClient
 
 client = FutureHouseClient(
-    organization="your_organization",
     api_key="your_api_key",
 )
 ```
-
-### Stages
-
-The stage is where your job will be submitted. This parameter can be one of the following:
-| Name | Description |
-| --- | --- |
-| Stage.PROD | Production environment at https://api.platform.futurehouse.org |
-| Stage.DEV | Development environment at https://dev.api.platform.futurehouse.org |
 
 ## Authentication
 
