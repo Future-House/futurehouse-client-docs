@@ -32,7 +32,7 @@ from aviary.core import DummyEnv
 import ldp
 
 client = FutureHouseClient(
-    stage=Stage.DEV,
+    stage=Stage.PROD,
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
@@ -72,7 +72,7 @@ from futurehouse_client import FutureHouseClient
 from futurehouse_client.models import Stage, AuthType
 
 client = FutureHouseClient(
-    stage=Stage.DEV,
+    stage=Stage.PROD,
     organization="your_organization",
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
@@ -113,7 +113,7 @@ from futurehouse_client import FutureHouseClient, JobNames
 from futurehouse_client.models import AuthType, Stage
 
 client = FutureHouseClient(
-    stage=Stage.DEV,
+    stage=Stage.PROD,
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
@@ -149,7 +149,7 @@ from futurehouse_client import FutureHouseClient, JobNames
 from futurehouse_client.models import AuthType, Stage
 
 client = FutureHouseClient(
-    stage=Stage.DEV,
+    stage=Stage.PROD,
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
@@ -181,6 +181,7 @@ from futurehouse_client import FutureHouseClient
 from futurehouse_client.models import AuthType
 
 client = FutureHouseClient(
+    stage=Stage.PROD,
     auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
