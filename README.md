@@ -2,14 +2,11 @@
 
 Documentation and tutorials for futurehouse-client, a client for interacting with endpoints of the FutureHouse platform.
 
-> FutureHouse's mascot is the crow. Therefore, some objects are named after the crow as a homage.
-
 <!--TOC-->
 
 - [Installation](#installation)
 - [Quickstart](#quickstart)
 - [Functionalities](#functionalities)
-  - [Stages](#stages)
 - [Authentication](#authentication)
 - [Task submission](#task-submission)
 - [Task Continuation](#task-continuation)
@@ -32,14 +29,12 @@ from aviary.core import DummyEnv
 import ldp
 
 client = FutureHouseClient(
-    stage=Stage.PROD,
-    auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
 
 task_data = {
     "name": JobNames.CROW,
-    "query": "Has anyone tested therapeutic exerkines in humans or NHPs?"
+    "query": "Which neglected diseases had a treatment developed by artificial intelligence?"
 }
 
 task_run_id = client.create_task(task_data)
@@ -53,39 +48,18 @@ A quickstart example can be found in the [client_notebook.ipynb](./docs/client_n
 
 FutureHouse client implements a RestClient (called `FutureHouseClient`) with the following functionalities:
 
-- [Authentication](#authtype): `auth_client`
 - [Task submission](#task-submission): `create_task(TaskRequest)`
 - [Task status](#task-status): `get_task(task_id)`
 
-To create a `FutureHouseClient`, you need to pass the following parameters:
-| Parameter | Type | Default | Description |
-| --- | --- | --- | --- |
-| stage | Stage | Stage.DEV | Where the job will be submitted? |
-| organization | str \| None | None | Which organization to use? |
-| auth_type | AuthType | AuthType.API_KEY | Which authentication method to use? |
-| api_key | str \| None | None | The API key to use for authentication, if using auth_type=AuthType.API_KEY. |
-
-To instantiate a Client, we can use the following code:
+To create a `FutureHouseClient`, you need to pass an FutureHouse platform api key (see [Authentication](#authentication)):
 
 ```python
 from futurehouse_client import FutureHouseClient
-from futurehouse_client.models import Stage, AuthType
 
 client = FutureHouseClient(
-    stage=Stage.PROD,
-    organization="your_organization",
-    auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
 ```
-
-### Stages
-
-The stage is where your job will be submitted. This parameter can be one of the following:
-| Name | Description |
-| --- | --- |
-| Stage.DEV | Development environment at https://dev.api.platform.futurehouse.org |
-| Stage.PROD | Production environment at https://api.platform.futurehouse.org |
 
 ## Authentication
 
@@ -110,16 +84,13 @@ The task submission looks like this:
 
 ```python
 from futurehouse_client import FutureHouseClient, JobNames
-from futurehouse_client.models import AuthType, Stage
 
 client = FutureHouseClient(
-    stage=Stage.PROD,
-    auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
 
 task_data = {
-    "name": JobNames.CROW,
+    "name": JobNames.OWL,
     "query": "Has anyone tested therapeutic exerkines in humans or NHPs?"
 }
 
@@ -146,11 +117,8 @@ To accomplish that, we can use the `runtime_config` we discussed in the [Task su
 
 ```python
 from futurehouse_client import FutureHouseClient, JobNames
-from futurehouse_client.models import AuthType, Stage
 
 client = FutureHouseClient(
-    stage=Stage.PROD,
-    auth_type=AuthType.API_KEY,
     api_key="your_api_key",
 )
 
@@ -178,11 +146,8 @@ Once a task is submitted, you can retrieve it by calling the `get_task` method, 
 
 ```python
 from futurehouse_client import FutureHouseClient
-from futurehouse_client.models import AuthType
 
-client = FutureHouseClient(
-    stage=Stage.PROD,
-    auth_type=AuthType.API_KEY,
+client = FutureHouseClient(,
     api_key="your_api_key",
 )
 
