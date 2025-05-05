@@ -1,6 +1,5 @@
 # FutureHouse Platform API Documentation
 
-[![GitHub](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Future-House/futurehouse-client-docs)
 [![PyPI version](https://badge.fury.io/py/futurehouse-client.svg)](https://badge.fury.io/py/futurehouse-client)
 ![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)
 ![PyPI Python Versions](https://img.shields.io/pypi/pyversions/futurehouse-client)
