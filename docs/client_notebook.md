@@ -15,8 +15,6 @@ jupyter:
 # FutureHouse platform client usage example
 
 ```python
-import time
-
 from futurehouse_client import FutureHouseClient, JobNames
 from futurehouse_client.models import (
     RuntimeConfig,
@@ -45,14 +43,12 @@ Submitting task to a futurehouse job is done by calling the `create_task` method
 ```python
 task_data = TaskRequest(
     name=JobNames.from_string("crow"),
-    query="What is the molecule known to have the smallest solubility in water?",
+    query="What is the molecule known to have the greatest solubility in water?",
 )
-client.create_task(task_data)
+task_response = client.run_tasks_until_done(task_data)
 
-while client.get_task().status != "success":
-    time.sleep(5)
-print(f"Task status: {client.get_task().status}")
-print(f"Task answer: \n{client.get_task().formatted_answer}")
+print(f"Job status: {task_response.status}")
+print(f"Job answer: \n{task_response.formatted_answer}")
 ```
 
 You can also pass a `runtime_config` to the `create_task` method, which will be used to configure the agent on runtime.
@@ -72,12 +68,10 @@ task_data = TaskRequest(
     query="How many moons does earth have?",
     runtime_config=RuntimeConfig(agent=agent, max_steps=10),
 )
-client.create_task(task_data)
+task_response = client.run_tasks_until_done(task_data)
 
-while client.get_task().status != "success":
-    time.sleep(5)
-print(f"Task status: {client.get_task().status}")
-print(f"Task answer: \n{client.get_task().formatted_answer}")
+print(f"Job status: {task_response.status}")
+print(f"Job answer: \n{task_response.formatted_answer}")
 ```
 
 # Continue a job
@@ -92,25 +86,24 @@ task_data = TaskRequest(
     name=JobNames.CROW, query="How many species of birds are there?"
 )
 
-task_id = client.create_task(task_data)
-while client.get_task().status != "success":
-    time.sleep(5)
-print(f"First task status: {client.get_task().status}")
-print(f"First task answer: \n{client.get_task().formatted_answer}")
+task_response = client.run_tasks_until_done(task_data)
+
+print(f"First job status: {task_response.status}")
+print(f"First job answer: \n{task_response.formatted_answer}")
 ```
 
 ```python
-continued_task_data = {
+continued_job_data = {
     "name": JobNames.CROW,
     "query": (
-        "From the previous answer, specifically, how many species of crows are there?"
+        "From the previous answer, specifically,how many species of crows are there?"
     ),
-    "runtime_config": {"continued_job_id": task_id},
+    "runtime_config": {"continued_job_id": task_response.task_id},
 }
 
-continued_task_id = client.create_task(continued_task_data)
-while client.get_task().status != "success":
-    time.sleep(5)
-print(f"Continued task status: {client.get_task().status}")
-print(f"Continued task answer: \n{client.get_task().formatted_answer}")
+continued_task_response = client.run_tasks_until_done(continued_job_data)
+
+
+print(f"Continued job status: {continued_task_response.status}")
+print(f"Continued job answer: \n{continued_task_response.formatted_answer}")
 ```
