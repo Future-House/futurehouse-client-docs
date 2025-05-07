@@ -130,6 +130,39 @@ if __name__ == "__main__":
     task_id = asyncio.run(main())
 ```
 
+Note that in either the sync or the async code, collections of tasks can be given to the client to run them in a batch:
+
+```python
+import asyncio
+from futurehouse_client import FutureHouseClient, JobNames
+
+
+async def main():
+    client = FutureHouseClient(
+        api_key="your_api_key",
+    )
+
+    task_data = [{
+        "name": JobNames.OWL,
+        "query": "Has anyone tested therapeutic exerkines in humans or NHPs?",
+    },
+    {
+        "name": JobNames.CROW,
+        "query": "Are there any clinically validated therapeutic exerkines for humans?",
+    }
+    ]
+
+    task_responses = await client.arun_tasks_until_done(task_data)
+    print(task_responses[0].answer)
+    print(task_responses[1].answer)
+    return task_id
+
+
+# For Python 3.7+
+if __name__ == "__main__":
+    task_id = asyncio.run(main())
+```
+
 `TaskRequest` can also be used to submit jobs and it has the following fields:
 
 | Field          | Type          | Description                                                                                                         |
