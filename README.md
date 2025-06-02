@@ -224,10 +224,10 @@ print(task_response.environment_frame)
 In that case, a `TaskResponseVerbose` will have the following fields:
 
 | Field             | Type | Description                                                                                                            |
-| ----------------- | ---- | ---------------------------------------------------------------------------------------------------------------------- | --- |
+| ----------------- | ---- | ---------------------------------------------------------------------------------------------------------------------- |
 | agent_state       | dict | Large object with all agent states during the progress of your task.                                                   |
 | environment_frame | dict | Large nested object with all environment data, for PQA environments it includes contexts, paper metadata, and answers. |
-| metadata          | dict | Extra metadata about your query.                                                                                       |     |
+| metadata          | dict | Extra metadata about your query.                                                                                       |
 
 ## Task Continuation
 
