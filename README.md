@@ -249,7 +249,7 @@ task_id = client.create_task(task_data)
 continued_task_data = {
     "name": JobNames.CROW,
     "query": "From the previous answer, specifically,how many species of crows are there?",
-    "runtime_config": {"continued_task_id": task_id},
+    "runtime_config": {"continued_job_id": task_id},
 }
 
 task_result = client.run_tasks_until_done(continued_task_data)
