@@ -45,7 +45,8 @@ task_data = TaskRequest(
     name=JobNames.from_string("crow"),
     query="What is the molecule known to have the greatest solubility in water?",
 )
-task_response = client.run_tasks_until_done(task_data)
+responses = client.run_tasks_until_done(task_data)
+task_response = responses[0]
 
 print(f"Job status: {task_response.status}")
 print(f"Job answer: \n{task_response.formatted_answer}")
@@ -68,7 +69,8 @@ task_data = TaskRequest(
     query="How many moons does earth have?",
     runtime_config=RuntimeConfig(agent=agent, max_steps=10),
 )
-task_response = client.run_tasks_until_done(task_data)
+responses = client.run_tasks_until_done(task_data)
+task_response = responses[0]
 
 print(f"Job status: {task_response.status}")
 print(f"Job answer: \n{task_response.formatted_answer}")
@@ -86,7 +88,8 @@ task_data = TaskRequest(
     name=JobNames.CROW, query="How many species of birds are there?"
 )
 
-task_response = client.run_tasks_until_done(task_data)
+responses = client.run_tasks_until_done(task_data)
+task_response = responses[0]
 
 print(f"First job status: {task_response.status}")
 print(f"First job answer: \n{task_response.formatted_answer}")
@@ -101,7 +104,8 @@ continued_job_data = {
     "runtime_config": {"continued_job_id": task_response.task_id},
 }
 
-continued_task_response = client.run_tasks_until_done(continued_job_data)
+responses = client.run_tasks_until_done(continued_job_data)
+continued_task_response = responses[0]
 
 
 print(f"Continued job status: {continued_task_response.status}")
