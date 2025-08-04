@@ -38,7 +38,7 @@ client = FutureHouseClient(
 
 
 In the futurehouse platform, we refer to the deployed combination of agent and environment as a `job`.
-Submitting task to a futurehouse job is done by calling the `create_task` method, which receives a `TaskRequest` object.
+Submitting a task to a futurehouse job is done by calling the `create_task` method, which receives a `TaskRequest` object.
 
 For convenience, one can use the `run_tasks_until_done` method, which submits the task, waits for the task to be completed, and returns a list of `TaskResponse` objects.
 
