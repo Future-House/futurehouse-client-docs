@@ -38,20 +38,23 @@ client = FutureHouseClient(
 
 
 In the futurehouse platform, we refer to the deployed combination of agent and environment as a `job`.
-Submitting task to a futurehouse job is done by calling the `create_task` method, which receives a `TaskRequest` object.
+Submitting task to a futurehouse job is done by calling the `run_tasks_until_done` method, which receives a `TaskRequest` object.
+
+For convenience, one can use the `run_tasks_until_done` method, which submits the task and returns a list of `TaskResponse` objects.
 
 ```python
 task_data = TaskRequest(
     name=JobNames.from_string("crow"),
     query="What is the molecule known to have the greatest solubility in water?",
 )
-task_response = client.run_tasks_until_done(task_data)
+responses = client.run_tasks_until_done(task_data)
+task_response = responses[0]
 
 print(f"Job status: {task_response.status}")
 print(f"Job answer: \n{task_response.formatted_answer}")
 ```
 
-You can also pass a `runtime_config` to the `create_task` method, which will be used to configure the agent on runtime.
+You can also pass a `runtime_config` to the `run_tasks_until_done` method, which will be used to configure the agent on runtime.
 Here, we will define a agent configuration and include it in the `TaskRequest`. This agent is used to decide the next action to take.
 We will also use the `max_steps` parameter to limit the number of steps the agent will take.
 
@@ -68,7 +71,8 @@ task_data = TaskRequest(
     query="How many moons does earth have?",
     runtime_config=RuntimeConfig(agent=agent, max_steps=10),
 )
-task_response = client.run_tasks_until_done(task_data)
+responses = client.run_tasks_until_done(task_data)
+task_response = responses[0]
 
 print(f"Job status: {task_response.status}")
 print(f"Job answer: \n{task_response.formatted_answer}")
@@ -79,14 +83,15 @@ print(f"Job answer: \n{task_response.formatted_answer}")
 The platform allows to ask follow-up questions to the previous job.
 To accomplish that, we can use the `runtime_config` to pass the `task_id` of the previous task.
 
-Notice that `create_task` accepts both a `TaskRequest` object and a dictionary with keywords arguments.
+Notice that `run_tasks_until_done` accepts both a `TaskRequest` object and a dictionary with keywords arguments.
 
 ```python
 task_data = TaskRequest(
     name=JobNames.CROW, query="How many species of birds are there?"
 )
 
-task_response = client.run_tasks_until_done(task_data)
+responses = client.run_tasks_until_done(task_data)
+task_response = responses[0]
 
 print(f"First job status: {task_response.status}")
 print(f"First job answer: \n{task_response.formatted_answer}")
@@ -101,7 +106,8 @@ continued_job_data = {
     "runtime_config": {"continued_job_id": task_response.task_id},
 }
 
-continued_task_response = client.run_tasks_until_done(continued_job_data)
+responses = client.run_tasks_until_done(continued_job_data)
+continued_task_response = responses[0]
 
 
 print(f"Continued job status: {continued_task_response.status}")
