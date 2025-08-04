@@ -46,10 +46,12 @@ task_data = TaskRequest(
     query="What is the molecule known to have the greatest solubility in water?",
 )
 responses = client.run_tasks_until_done(task_data)
-task_response = responses[0]
-
-print(f"Job status: {task_response.status}")
-print(f"Job answer: \n{task_response.formatted_answer}")
+if not responses:
+    print("No response received from the job.")
+else:
+    task_response = responses[0]
+    print(f"Job status: {task_response.status}")
+    print(f"Job answer: \n{task_response.formatted_answer}")
 ```
 
 You can also pass a `runtime_config` to the `create_task` method, which will be used to configure the agent on runtime.
